@@ -99,14 +99,14 @@ eitherErrnoIfRetryMayBlock p f on_block = loop
 
 ----------------------------------------------------------------
 
-eitherErrnoIfMinus1 :: (Num a) => IO a -> IO (Either C.Errno a)
+eitherErrnoIfMinus1 :: (Eq a, Num a) => IO a -> IO (Either C.Errno a)
 eitherErrnoIfMinus1 = eitherErrnoIf (-1 ==)
 
-eitherErrnoIfMinus1Retry :: (Num a) => IO a -> IO (Either C.Errno a)
+eitherErrnoIfMinus1Retry :: (Eq a, Num a) => IO a -> IO (Either C.Errno a)
 eitherErrnoIfMinus1Retry = eitherErrnoIfRetry (-1 ==)
 
 eitherErrnoIfMinus1RetryMayBlock
-    :: (Num a) => IO a -> IO b -> IO (Either C.Errno a)
+    :: (Eq a,Num a) => IO a -> IO b -> IO (Either C.Errno a)
 eitherErrnoIfMinus1RetryMayBlock =
     eitherErrnoIfRetryMayBlock (-1 ==)
 
